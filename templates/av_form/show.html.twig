@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AvForm{% endblock %}
+
+{% block body %}
+    <h1>AvForm</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ av_form.id }}</td>
+            </tr>
+            <tr>
+                <th>Message_form</th>
+                <td>{{ av_form.messageForm }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_av_form_index') }}">back to list</a>
+
+    <a href="{{ path('app_av_form_edit', {'id': av_form.id}) }}">edit</a>
+
+    {{ include('av_form/_delete_form.html.twig') }}
+{% endblock %}

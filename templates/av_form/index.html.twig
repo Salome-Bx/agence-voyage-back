@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AvForm index{% endblock %}
+
+{% block body %}
+    <h1>AvForm index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Message_form</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for av_form in av_forms %}
+            <tr>
+                <td>{{ av_form.id }}</td>
+                <td>{{ av_form.messageForm }}</td>
+                <td>
+                    <a href="{{ path('app_av_form_show', {'id': av_form.id}) }}">show</a>
+                    <a href="{{ path('app_av_form_edit', {'id': av_form.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_av_form_new') }}">Create new</a>
+{% endblock %}

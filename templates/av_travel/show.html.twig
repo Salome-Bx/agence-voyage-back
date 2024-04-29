@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AvTravel{% endblock %}
+
+{% block body %}
+    <h1>AvTravel</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ av_travel.id }}</td>
+            </tr>
+            <tr>
+                <th>Title_travel</th>
+                <td>{{ av_travel.titleTravel }}</td>
+            </tr>
+            <tr>
+                <th>Picture_travel</th>
+                <td>{{ av_travel.pictureTravel }}</td>
+            </tr>
+            <tr>
+                <th>Description_travel</th>
+                <td>{{ av_travel.descriptionTravel }}</td>
+            </tr>
+            <tr>
+                <th>Datestart_travel</th>
+                <td>{{ av_travel.datestartTravel ? av_travel.datestartTravel|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Dateend_travel</th>
+                <td>{{ av_travel.dateendTravel ? av_travel.dateendTravel|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Price_travel</th>
+                <td>{{ av_travel.priceTravel }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_av_travel_index') }}">back to list</a>
+
+    <a href="{{ path('app_av_travel_edit', {'id': av_travel.id}) }}">edit</a>
+
+    {{ include('av_travel/_delete_form.html.twig') }}
+{% endblock %}
