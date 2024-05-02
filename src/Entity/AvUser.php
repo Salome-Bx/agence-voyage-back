@@ -6,6 +6,7 @@ use App\Repository\AvUserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AvUserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -16,7 +17,9 @@ class AvUser implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank(message: "L'email' ne peut pas être vide.")]
     private ?string $email = null;
 
     /**
@@ -31,9 +34,11 @@ class AvUser implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[Assert\Length(min: 2, minMessage: "Le nom doit contenir au minimum 2 caractères.", max: 255, maxMessage: "Le nom doit faire au plus 255 caractères")]
     #[ORM\Column(length: 255)]
     private ?string $lastname_user = null;
 
+    #[Assert\Length(min: 2, minMessage: "Le prénom doit contenir au minimum 2 caractères.", max: 255, maxMessage: "Le prénom doit faire au plus 255 caractères")]
     #[ORM\Column(length: 255)]
     private ?string $firstname_user = null;
 

@@ -10,8 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 
 #[Route('/av/user')]
+#[IsGranted('ROLE_ADMIN', statusCode: 423, message: "Vous n'avez pas les droits pour accéder à cette page")]
 class AvUserController extends AbstractController
 {
     #[Route('/', name: 'app_av_user_index', methods: ['GET'])]
@@ -33,6 +36,7 @@ class AvUserController extends AbstractController
             $entityManager->persist($avUser);
             $entityManager->flush();
 
+            $this->addFlash('success', "L'utilisateur' a bien été enregistré.");
             return $this->redirectToRoute('app_av_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -59,6 +63,7 @@ class AvUserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Modification effectuée');
             return $this->redirectToRoute('app_av_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -68,12 +73,13 @@ class AvUserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_av_user_delete', methods: ['POST'])]
+    #[Route('/{id}/edit', name: 'app_av_user_delete', methods: ['POST'])]
     public function delete(Request $request, AvUser $avUser, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$avUser->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($avUser);
             $entityManager->flush();
+            $this->addFlash('success', 'Utilisateur supprimé');
         }
 
         return $this->redirectToRoute('app_av_user_index', [], Response::HTTP_SEE_OTHER);

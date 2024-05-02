@@ -1,45 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}AvUser index{% endblock %}
+{% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
-    <h1>AvUser index</h1>
+{{ include('includes/success.html.twig') }}
+{% for message in app.flashes('success') %}
+		<div class="bg-success">
+			{{ message | join('<br>') }}
+		</div>
+	{% endfor %}
+    <h1>Liste des utilisateurs</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Lastname_user</th>
-                <th>Firstname_user</th>
-                <th>Phone_user</th>
-                <th>actions</th>
+    <table class="table table-fixed text-left w-full">
+        <thead class="bg-gray-600 flex text-white w-full flex-col overflow-y-scroll">
+            <tr class="flex w-full">
+                <th class="p-3 max-w-fit">Id</th>
+                <th class="p-3 max-w-fit">Nom</th>
+                <th class="p-3 max-w-fit">Prénom</th>
+                <th class="p-3 max-w-fit">Email</th>
+                <th class="p-3 max-w-fit">Téléphone</th>
+                <th class="p-3 max-w-fit">Role</th>
+                <th class="p-3 max-w-fit">Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="flex flex-col overflow-y-scroll w-full">
         {% for av_user in av_users %}
-            <tr>
-                <td>{{ av_user.id }}</td>
-                <td>{{ av_user.email }}</td>
-                <td>{{ av_user.roles ? av_user.roles|json_encode : '' }}</td>
-                <td>{{ av_user.password }}</td>
-                <td>{{ av_user.lastnameUser }}</td>
-                <td>{{ av_user.firstnameUser }}</td>
-                <td>{{ av_user.phoneUser }}</td>
-                <td>
-                    <a href="{{ path('app_av_user_show', {'id': av_user.id}) }}">show</a>
-                    <a href="{{ path('app_av_user_edit', {'id': av_user.id}) }}">edit</a>
+            <tr class="flex w-full">
+                <td class="p-2 max-w-fit">{{ av_user.id }}</td>
+                <td class="p-2 max-w-fit">{{ av_user.lastnameUser }}</td>
+                <td class="p-2 max-w-fit">{{ av_user.firstnameUser }}</td> 
+                <td class="p-2 max-w-fit">{{ av_user.email }}</td>
+                <td class="p-2 max-w-fit">{{ av_user.phoneUser }}</td> 
+                <td class="p-2 max-w-fit">{{ av_user.roles ? av_user.roles|json_encode : '' }}</td>
+                
+               
+               
+                <td class="p-2">
+                    <a href="{{ path('app_av_user_show', {'id': av_user.id}) }}">Détails</a>
+                    <a href="{{ path('app_av_user_edit', {'id': av_user.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
+            <tr class="flex w-full">
+                <td colspan="8">Aucun utilisateur trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_av_user_new') }}">Create new</a>
+    <a href="{{ path('app_av_user_new') }}">Créer un nouvel utilisateur</a>
 {% endblock %}

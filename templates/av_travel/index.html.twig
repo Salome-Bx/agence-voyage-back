@@ -4,6 +4,8 @@
 
 {% block body %}
     <h1>AvTravel index</h1>
+{# {{ dump(av_user) }} #}
+
 
     <table class="table">
         <thead>
@@ -23,14 +25,20 @@
             <tr>
                 <td>{{ av_travel.id }}</td>
                 <td>{{ av_travel.titleTravel }}</td>
-                <td>{{ av_travel.pictureTravel }}</td>
+                <td><img src="{{ av_travel.pictureTravel }}" alt=""></td>
                 <td>{{ av_travel.descriptionTravel }}</td>
-                <td>{{ av_travel.datestartTravel ? av_travel.datestartTravel|date('Y-m-d') : '' }}</td>
-                <td>{{ av_travel.dateendTravel ? av_travel.dateendTravel|date('Y-m-d') : '' }}</td>
+                <td>{{ av_travel.datestartTravel ? av_travel.datestartTravel|date('d-m-Y') : '' }}</td>
+                <td>{{ av_travel.dateendTravel ? av_travel.dateendTravel|date('d-m-Y') : '' }}</td>
                 <td>{{ av_travel.priceTravel }}</td>
                 <td>
+                
                     <a href="{{ path('app_av_travel_show', {'id': av_travel.id}) }}">show</a>
+                    
+                    {% if is_granted('ROLE_ADMIN') or av_user.id == av_travel.AvUser.id %}
                     <a href="{{ path('app_av_travel_edit', {'id': av_travel.id}) }}">edit</a>
+
+                    {% endif %}
+
                 </td>
             </tr>
         {% else %}

@@ -5,11 +5,13 @@ namespace App\Controller;
 use App\Entity\AvTravel;
 use App\Form\AvTravelType;
 use App\Repository\AvTravelRepository;
+use App\Repository\AvUserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/av/travel')]
 class AvTravelController extends AbstractController
@@ -17,9 +19,12 @@ class AvTravelController extends AbstractController
     #[Route('/', name: 'app_av_travel_index', methods: ['GET'])]
     public function index(AvTravelRepository $avTravelRepository): Response
     {
+        $user = $this->getUser();
         return $this->render('av_travel/index.html.twig', [
             'av_travels' => $avTravelRepository->findAll(),
+            'av_user' => $user
         ]);
+        
     }
 
     #[Route('/new', name: 'app_av_travel_new', methods: ['GET', 'POST'])]
@@ -50,9 +55,11 @@ class AvTravelController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_EDITEUR', statusCode: 423, message: "Vous ne pouvez modifier que vos annonces")]
     #[Route('/{id}/edit', name: 'app_av_travel_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, AvTravel $avTravel, EntityManagerInterface $entityManager): Response
     {
+        
         $form = $this->createForm(AvTravelType::class, $avTravel);
         $form->handleRequest($request);
 
