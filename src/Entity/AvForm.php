@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AvFormRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AvFormRepository::class)]
 class AvForm
@@ -14,9 +15,16 @@ class AvForm
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([
+        'api_av_form_index'
+    ])]
+    
     private ?string $message_form = null;
 
     #[ORM\ManyToOne]
+    #[Groups([
+        'api_av_form_index'
+    ])]
     #[ORM\JoinColumn(nullable: false)]
     private ?AvTravel $AvTravel = null;
 

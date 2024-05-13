@@ -7,31 +7,53 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AvTravelRepository::class)]
 class AvTravel
 {
     #[ORM\Id]
+    #[Groups([
+        'api_av_travel_index'
+    ])]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([
+        'api_av_travel_index'
+    ])]
     private ?string $title_travel = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([
+        'api_av_travel_index'
+    ])]
     private ?string $picture_travel = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups([
+        'api_av_travel_index'
+    ])]
     private ?string $description_travel = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups([
+        'api_av_travel_index'
+    ])]
     private ?\DateTimeInterface $datestart_travel = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups([
+        'api_av_travel_index'
+    ])]
     private ?\DateTimeInterface $dateend_travel = null;
 
     #[ORM\Column]
+    #[Groups([
+        'api_av_travel_index'
+    ])]
     private ?int $price_travel = null;
 
     #[ORM\ManyToOne]
@@ -42,12 +64,16 @@ class AvTravel
      * @var Collection<int, AvCategory>
      */
     #[ORM\ManyToMany(targetEntity: AvCategory::class)]
+    #[Groups([
+        'api_av_travel_index'
+    ])]
     private Collection $AvCategory;
 
     /**
      * @var Collection<int, AvCountry>
      */
     #[ORM\ManyToMany(targetEntity: AvCountry::class)]
+    
     private Collection $AvCountry;
 
     public function __construct()

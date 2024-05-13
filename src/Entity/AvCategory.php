@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AvCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AvCategoryRepository::class)]
 class AvCategory
@@ -11,9 +12,15 @@ class AvCategory
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups([
+        'api_av_travel_index'
+    ])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([
+        'api_av_travel_index'
+    ])]
     private ?string $name_category = null;
 
     public function getId(): ?int

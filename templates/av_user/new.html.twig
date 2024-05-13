@@ -3,13 +3,21 @@
 {% block title %}New AvUser{% endblock %}
 
 {% block body %}
+
     <h1>Créer un nouvel utilisateur</h1>
+	
 {% for message in app.flashes('success') %}
 		<div class="bg-success">
 			{{ message | join('<br>') }}
 		</div>
 	{% endfor %}
+	
+	{{ include('includes/success.html.twig') }}
+
     {{ include('av_user/_form.html.twig') }}
 
+	{{ include('includes/button.html.twig') }}
+
     <a href="{{ path('app_av_user_index') }}">Retour à la liste</a>
+
 {% endblock %}
