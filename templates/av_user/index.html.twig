@@ -3,12 +3,15 @@
 {% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
+
 {{ include('includes/success.html.twig') }}
 {% for message in app.flashes('success') %}
-		<div class="bg-success">
+		<div>
 			{{ message | join('<br>') }}
 		</div>
 	{% endfor %}
+
+
     <h1>Liste des utilisateurs</h1>
 
     <table class="table table-fixed text-left w-full">
