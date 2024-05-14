@@ -19,8 +19,9 @@
                 <td>{{ av_status.id }}</td>
                 <td>{{ av_status.nameStatus }}</td>
                 <td>
-                    <a href="{{ path('app_av_status_show', {'id': av_status.id}) }}">show</a>
-                    <a href="{{ path('app_av_status_edit', {'id': av_status.id}) }}">edit</a>
+                    <a href="{{ path('app_av_travel_show', {'id': av_travel.id}) }}"   class="bg-blue-400 rounded p-2 m-2 text-white inline">Détails</a>
+
+                    <a href="{{ path('app_av_travel_edit', {'id': av_travel.id}) }}"  class="bg-yellow-400 rounded p-2 m-2 text-white inline">Editer</a>
                 </td>
             </tr>
         {% else %}

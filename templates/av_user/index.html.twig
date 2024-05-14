@@ -39,8 +39,9 @@
                
                
                 <td class="p-2">
-                    <a href="{{ path('app_av_user_show', {'id': av_user.id}) }}">Détails</a>
-                    <a href="{{ path('app_av_user_edit', {'id': av_user.id}) }}">Editer</a>
+                    <a href="{{ path('app_av_user_show', {'id': av_user.id}) }} "   class="bg-blue-400 rounded p-1 ml-1 text-white inline">Détails</a>
+                    <a href="{{ path('app_av_user_edit', {'id': av_user.id}) }}"  class="bg-yellow-400 rounded p-1 ml-1 text-white inline">Editer</a>
+                    
                 </td>
             </tr>
         {% else %}
