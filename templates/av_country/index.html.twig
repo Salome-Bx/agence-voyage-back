@@ -19,8 +19,9 @@
                 <td>{{ av_country.id }}</td>
                 <td>{{ av_country.nameCountry }}</td>
                 <td>
-                    <a href="{{ path('app_av_country_show', {'id': av_country.id}) }}">show</a>
-                    <a href="{{ path('app_av_country_edit', {'id': av_country.id}) }}">edit</a>
+                    <a href="{{ path('app_av_travel_show', {'id': av_travel.id}) }}"   class="bg-blue-400 rounded p-2 m-2 text-white inline">Détails</a>
+
+                    <a href="{{ path('app_av_travel_edit', {'id': av_travel.id}) }}"  class="bg-yellow-400 rounded p-2 m-2 text-white inline">Editer</a>
                 </td>
             </tr>
         {% else %}

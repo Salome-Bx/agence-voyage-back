@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}AvTravel{% endblock %}
 
 {% block body %}
@@ -38,9 +39,13 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_av_travel_index') }}">back to list</a>
+    <a href="{{ path('app_av_travel_index') }}"  class="bg-blue-400 rounded p-2 m-2 inline text-white">Retour à la liste</a>
 
-    <a href="{{ path('app_av_travel_edit', {'id': av_travel.id}) }}">edit</a>
+    <a href="{{ path('app_av_travel_edit', {'id': av_travel.id}) }}"  class="bg-yellow-400 rounded p-2 m-2 text-white inline">Editer</a>
+
+   
+    {{ button('Editer', path('app_av_user_edit', {'id': av_user.id}), 'bg-yellow-400') }}
+
 
     {{ include('av_travel/_delete_form.html.twig') }}
 {% endblock %}

@@ -3,39 +3,39 @@
 {% block title %}AvTravel index{% endblock %}
 
 {% block body %}
-    <h1>AvTravel index</h1>
+    <h1 class="my-2 text-yellow-400 text-2xl font-bold right-0">Liste des voyages</h1>
 {# {{ dump(av_user) }} #}
-
+<a href="{{ path('app_av_travel_new') }}"  class="bg-green-400 rounded p-2 m-2 text-white inline text-right my-4">Créer</a>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title_travel</th>
-                <th>Picture_travel</th>
-                <th>Description_travel</th>
-                <th>Datestart_travel</th>
-                <th>Dateend_travel</th>
-                <th>Price_travel</th>
-                <th>actions</th>
+                <th class="p-1">Id</th>
+                <th class="p-1">Title_travel</th>
+                <th class="p-1">Picture_travel</th>
+                <th class="p-1">Description_travel</th>
+                <th class="p-1">Datestart_travel</th>
+                <th class="p-1">Dateend_travel</th>
+                <th class="p-1">Price_travel</th>
+                <th class="p-1">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for av_travel in av_travels %}
             <tr>
-                <td>{{ av_travel.id }}</td>
-                <td>{{ av_travel.titleTravel }}</td>
-                <td><img src="{{ av_travel.pictureTravel }}" alt=""></td>
-                <td>{{ av_travel.descriptionTravel }}</td>
-                <td>{{ av_travel.datestartTravel ? av_travel.datestartTravel|date('d-m-Y') : '' }}</td>
-                <td>{{ av_travel.dateendTravel ? av_travel.dateendTravel|date('d-m-Y') : '' }}</td>
-                <td>{{ av_travel.priceTravel }}</td>
-                <td>
+                <td class="p-3">{{ av_travel.id }}</td>
+                <td class="p-3">{{ av_travel.titleTravel }}</td>
+                <td class="p-3"><img src="{{ av_travel.pictureTravel }}" alt=""></td>
+                <td class="p-3">{{ av_travel.descriptionTravel }}</td>
+                <td class="p-3">{{ av_travel.datestartTravel ? av_travel.datestartTravel|date('d-m-Y') : '' }}</td>
+                <td class="p-3">{{ av_travel.dateendTravel ? av_travel.dateendTravel|date('d-m-Y') : '' }}</td>
+                <td class="p-3">{{ av_travel.priceTravel }} €</td>
+                <td class="p-1">
                 
-                    <a href="{{ path('app_av_travel_show', {'id': av_travel.id}) }}">show</a>
+                    <a href="{{ path('app_av_travel_show', {'id': av_travel.id}) }}"   class="bg-blue-400 rounded p-1 ml-1 text-white inline">Détails</a>
                     
                     {% if is_granted('ROLE_ADMIN') or av_user.id == av_travel.AvUser.id %}
-                    <a href="{{ path('app_av_travel_edit', {'id': av_travel.id}) }}">edit</a>
+                    <a href="{{ path('app_av_travel_edit', {'id': av_travel.id}) }}"  class="bg-yellow-400 rounded p-1 ml-1 text-white inline">Editer</a>
 
                     {% endif %}
 
@@ -49,5 +49,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_av_travel_new') }}">Create new</a>
+    
 {% endblock %}
