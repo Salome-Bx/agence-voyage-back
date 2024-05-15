@@ -38,9 +38,11 @@ class AvTravelController extends AbstractController
             $entityManager->persist($avTravel);
             $entityManager->flush();
 
+            
             return $this->redirectToRoute('app_av_travel_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        
+        $this->addFlash('success', 'Le voyage est créé.');
         return $this->render('av_travel/new.html.twig', [
             'av_travel' => $avTravel,
             'form' => $form,
@@ -66,9 +68,10 @@ class AvTravelController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Le voyage a été modifié.');
             return $this->redirectToRoute('app_av_travel_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        
         return $this->render('av_travel/edit.html.twig', [
             'av_travel' => $avTravel,
             'form' => $form,
@@ -82,7 +85,8 @@ class AvTravelController extends AbstractController
             $entityManager->remove($avTravel);
             $entityManager->flush();
         }
-
+        
+        $this->addFlash('success', 'Le voyage a été supprimé.');
         return $this->redirectToRoute('app_av_travel_index', [], Response::HTTP_SEE_OTHER);
     }
 }

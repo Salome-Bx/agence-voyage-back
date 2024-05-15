@@ -3,7 +3,13 @@
 {% block title %}Edit AvTravel{% endblock %}
 
 {% block body %}
-    <h1>Edit AvTravel</h1>
+    <h1>Editer un voyage</h1>
+
+    {% for message in app.flashes('success') %}
+		<div class="bg-yellow-400 text-black">
+			{{ message | join('<br>') }}
+		</div>
+	{% endfor %}
 
     {{ include('av_travel/_form.html.twig', {'button_label': 'Update'}) }}
 
