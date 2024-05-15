@@ -3,21 +3,25 @@
 {% block title %}AvTravel index{% endblock %}
 
 {% block body %}
-    <h1 class="my-2 text-yellow-400 text-2xl font-bold right-0">Liste des voyages</h1>
-{# {{ dump(av_user) }} #}
-<a href="{{ path('app_av_travel_new') }}"  class="bg-green-400 rounded p-2 m-2 text-white inline text-right my-4">Créer</a>
+    <h1 class="my-2 text-yellow-400 text-2xl font-bold mb-6 ">Liste des voyages</h1>
+
+   
+
+    <div class="flex justify-end">
+        <a href="{{ path('app_av_travel_new') }}"  class="bg-green-400 rounded p-2 m-3 text-white inline my-4">Créer un nouveau voyage</a>
+    </div>
 
     <table class="table">
         <thead>
             <tr>
                 <th class="p-1">Id</th>
-                <th class="p-1">Title_travel</th>
-                <th class="p-1">Picture_travel</th>
-                <th class="p-1">Description_travel</th>
-                <th class="p-1">Datestart_travel</th>
-                <th class="p-1">Dateend_travel</th>
-                <th class="p-1">Price_travel</th>
-                <th class="p-1">actions</th>
+                <th class="p-1">Voyages</th>
+                <th class="p-1">Image</th>
+                <th class="p-1">Description</th>
+                <th class="p-1">Date de départ</th>
+                <th class="p-1">Date de retour</th>
+                <th class="p-1">Prix</th>
+                <th class="p-1">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -29,13 +33,13 @@
                 <td class="p-3">{{ av_travel.descriptionTravel }}</td>
                 <td class="p-3">{{ av_travel.datestartTravel ? av_travel.datestartTravel|date('d-m-Y') : '' }}</td>
                 <td class="p-3">{{ av_travel.dateendTravel ? av_travel.dateendTravel|date('d-m-Y') : '' }}</td>
-                <td class="p-3">{{ av_travel.priceTravel }} €</td>
+                <td class="p-3">{{ av_travel.priceTravel }}€</td>
                 <td class="p-1">
                 
-                    <a href="{{ path('app_av_travel_show', {'id': av_travel.id}) }}"   class="bg-blue-400 rounded p-1 ml-1 text-white inline">Détails</a>
+                    <a href="{{ path('app_av_travel_show', {'id': av_travel.id}) }}"   class="flex bg-blue-400 rounded p-1 my-1 text-white inline">Détails</a>
                     
                     {% if is_granted('ROLE_ADMIN') or av_user.id == av_travel.AvUser.id %}
-                    <a href="{{ path('app_av_travel_edit', {'id': av_travel.id}) }}"  class="bg-yellow-400 rounded p-1 ml-1 text-white inline">Editer</a>
+                    <a href="{{ path('app_av_travel_edit', {'id': av_travel.id}) }}"  class="flex bg-yellow-400 rounded p-1 ml-1 text-white inline">Editer</a>
 
                     {% endif %}
 
@@ -43,7 +47,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Aucun utilisateur trouvé</td>
             </tr>
         {% endfor %}
         </tbody>

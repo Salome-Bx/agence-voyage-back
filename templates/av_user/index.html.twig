@@ -2,6 +2,8 @@
 
 {% block title %}Liste des utilisateurs{% endblock %}
 
+ 
+
 {% block body %}
 
 {{ include('includes/success.html.twig') }}
@@ -12,35 +14,40 @@
 	{% endfor %}
 
 
-    <h1>Liste des utilisateurs</h1>
+    <h1 class="my-2 text-yellow-400 text-2xl font-bold pb-6">Liste des utilisateurs</h1>
 
-    <table class="table table-fixed text-left w-full">
-        <thead class="bg-gray-600 flex text-white w-full flex-col overflow-y-scroll">
-            <tr class="flex w-full">
-                <th class="p-3 max-w-fit">Id</th>
-                <th class="p-3 max-w-fit">Nom</th>
-                <th class="p-3 max-w-fit">Prénom</th>
-                <th class="p-3 max-w-fit">Email</th>
-                <th class="p-3 max-w-fit">Téléphone</th>
-                <th class="p-3 max-w-fit">Role</th>
-                <th class="p-3 max-w-fit">Actions</th>
+    <div class="flex justify-end">
+        <a href="{{ path('app_av_user_new') }}"  class="bg-green-400 rounded p-2 m-3 text-white inline my-4">Créer un nouvel utilisateur</a>
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="p-2">Id</th>
+                <th class="p-2">Nom</th>
+                <th class="p-2">Prénom</th>
+                <th class="p-2">Email</th>
+                <th class="p-2">Téléphone</th>
+                <th class="p-2">Role</th>
+                <th class="p-2">Actions</th>
             </tr>
         </thead>
-        <tbody class="flex flex-col overflow-y-scroll w-full">
+        <tbody>
         {% for av_user in av_users %}
-            <tr class="flex w-full">
-                <td class="p-2 max-w-fit">{{ av_user.id }}</td>
-                <td class="p-2 max-w-fit">{{ av_user.lastnameUser }}</td>
-                <td class="p-2 max-w-fit">{{ av_user.firstnameUser }}</td> 
-                <td class="p-2 max-w-fit">{{ av_user.email }}</td>
-                <td class="p-2 max-w-fit">{{ av_user.phoneUser }}</td> 
-                <td class="p-2 max-w-fit">{{ av_user.roles ? av_user.roles|json_encode : '' }}</td>
+            <tr>
+                <td class="p-2 border-l-2">{{ av_user.id }}</td>
+                <td class="p-2 border-l-2">{{ av_user.lastnameUser }}</td>
+                <td class="p-2 border-l-2">{{ av_user.firstnameUser }}</td> 
+                <td class="p-2 border-l-2">{{ av_user.email }}</td>
+                <td class="p-2 border-l-2">{{ av_user.phoneUser }}</td> 
+                <td class="p-2 border-l-2 w-40">{{ av_user.roles ? av_user.roles|json_encode : '' }}</td>
                 
                
                
                 <td class="p-2">
-                    <a href="{{ path('app_av_user_show', {'id': av_user.id}) }} "   class="bg-blue-400 rounded p-1 ml-1 text-white inline">Détails</a>
-                    <a href="{{ path('app_av_user_edit', {'id': av_user.id}) }}"  class="bg-yellow-400 rounded p-1 ml-1 text-white inline">Editer</a>
+                    <a href="{{ path('app_av_user_show', {'id': av_user.id}) }} "   class="flex bg-blue-400 rounded p-1 ml-1 my-1 text-white inline">Détails</a>
+                    <a href="{{ path('app_av_user_edit', {'id': av_user.id}) }}"  class="flex bg-yellow-400 rounded p-1 ml-1 my-1 text-white inline">Editer</a>
                     
                 </td>
             </tr>
@@ -52,5 +59,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_av_user_new') }}">Créer un nouvel utilisateur</a>
+    
 {% endblock %}

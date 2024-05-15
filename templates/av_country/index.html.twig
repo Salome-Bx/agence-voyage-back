@@ -3,7 +3,7 @@
 {% block title %}AvCountry index{% endblock %}
 
 {% block body %}
-    <h1>AvCountry index</h1>
+    <h1 class="my-2 text-yellow-400 text-2xl font-bold right-0">Pays</h1>
 
     <table class="table">
         <thead>
@@ -19,9 +19,9 @@
                 <td>{{ av_country.id }}</td>
                 <td>{{ av_country.nameCountry }}</td>
                 <td>
-                    <a href="{{ path('app_av_travel_show', {'id': av_travel.id}) }}"   class="bg-blue-400 rounded p-2 m-2 text-white inline">Détails</a>
+                    <a href="{{ path('app_av_travel_show', {'id': av_country.id}) }}"   class="bg-blue-400 rounded p-2 m-2 text-white inline">Détails</a>
 
-                    <a href="{{ path('app_av_travel_edit', {'id': av_travel.id}) }}"  class="bg-yellow-400 rounded p-2 m-2 text-white inline">Editer</a>
+                    <a href="{{ path('app_av_travel_edit', {'id': av_country.id}) }}"  class="bg-yellow-400 rounded p-2 m-2 text-white inline">Editer</a>
                 </td>
             </tr>
         {% else %}
@@ -32,5 +32,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_av_country_new') }}">Create new</a>
+    <a href="{{ path('app_av_country_new') }}"  class="bg-green-400 rounded p-2 m-2 text-white inline text-right my-4">Créer un nouveau pays</a>
 {% endblock %}
